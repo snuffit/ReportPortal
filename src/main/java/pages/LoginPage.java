@@ -17,11 +17,11 @@ public class LoginPage extends BasePage {
     private final By LOGIN_BUTTON = By.xpath("//button[@type='submit']"),
             LOGIN_INPUT = By.name("login"),
             PASSWORD_INPUT = By.name("password");
+    private final String URI = BASE_URL.concat("/#login");
 
-    @Override
     public LoginPage open() {
-        log.info("Open LoginPage URI: '{}'", BASE_URL);
-        driver.get(BASE_URL);
+        log.info("Open LoginPage URI: '{}'", URI);
+        driver.get(URI);
         return this;
     }
 
@@ -37,11 +37,10 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public HomePage login(String login, String password) {
+    public void login(String login, String password) {
         log.info("Login");
         driver.findElement(LOGIN_INPUT).sendKeys(login);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
-        return new HomePage(driver);
     }
 }

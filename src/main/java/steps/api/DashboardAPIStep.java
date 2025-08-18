@@ -29,7 +29,7 @@ public class DashboardAPIStep extends BaseApi {
     public Response deleteDashboard(Dashboard dashboard) {
         String id = getDashboardID(dashboard.getName());
         log.info("Delete dashboard with id '{}' by API", id);
-        return delete(String.format("/%s/%s/%s", PROJECT_NAME, DASHBOARD_ENDPOINT, id)).getResponse();
+        return delete(String.format("%s%s/%s", PROJECT_NAME, DASHBOARD_ENDPOINT, id)).getResponse();
     }
 
     @Step("Get dashboard ID by name")

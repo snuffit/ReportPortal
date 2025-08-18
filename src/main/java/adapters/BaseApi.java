@@ -14,14 +14,14 @@ import static io.restassured.RestAssured.given;
 
 public class BaseApi {
 
-    static String baseURL = System.getProperty("baseURL", PropertyReader.getProperty("baseURL"));
-    static String token = System.getProperty("token", PropertyReader.getProperty("token"));
+    static final String BASE_URL = System.getProperty("baseURL", PropertyReader.getProperty("baseURL"));
+    static final String TOKEN = System.getProperty("token", PropertyReader.getProperty("token"));
 
     public static RequestSpecification getAuthenticatedSpec() {
         return new RequestSpecBuilder()
-                .setBaseUri(baseURL)
+                .setBaseUri(BASE_URL.concat("/api/v1"))
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Bearer " + token)
+                .addHeader("Authorization", "Bearer " + TOKEN)
                 .build();
     }
 
@@ -37,6 +37,7 @@ public class BaseApi {
 
     public ResponseWrapper delete(String endpoint) {
         return new ResponseWrapper(given()
+                .spec(getAuthenticatedSpec())
                 .when()
                 .delete(endpoint)
                 .then()

@@ -3,23 +3,13 @@
 <suite thread-count="2" name="CrossBrowser Test" parallel="tests">
     <test name="Chrome">
         <classes>
-            <class name="tests.LoginTest">
-                <methods>
-                    <include name="checkLogin"/>
-                </methods>
-            </class>
-            <class name="tests.CartTest">
-                <methods>
-                    <exclude name="checkAddSixProductsToCart"/>
-                </methods>
-            </class>
+            <class name="ui.widget.CreateWidgetTest"/>
             <parameter name="browser" value="chrome"/>
         </classes>
     </test> <!-- Test -->
     <test name="FireFox">
         <classes>
-            <class name="tests.EndToEndTest"/>
-            <class name="tests.SortTest"/>
+            <class name="ui.widget.CreateWidgetTest"/>
             <parameter name="browser" value="firefox"/>
         </classes>
     </test> <!-- Test -->
