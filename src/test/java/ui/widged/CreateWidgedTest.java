@@ -12,7 +12,6 @@ public class CreateWidgedTest extends BaseTest {
     Dashboard dashboard = Dashboard.builder()
             .name("TestDashboard")
             .build();
-    String dashboardID;
 
     @BeforeMethod
     public void createDashboard() {
@@ -21,7 +20,7 @@ public class CreateWidgedTest extends BaseTest {
 
     @Test
     public void createWidgedTest() {
-        login(login, password);
+        loginUIStep.auth(login, password);
         openDashboard(dashboard.getTitle);
         createWidged(widged);
         Assert.assertTrue(isWidgedDispayed(widget.getTitle), "Widget not created");
