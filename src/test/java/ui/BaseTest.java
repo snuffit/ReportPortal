@@ -10,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import steps.api.DashboardAPIStep;
 import utils.PropertyReader;
 
 import java.time.Duration;
@@ -18,9 +19,10 @@ import static utils.AllureUtils.takeScreenshot;
 
 public class BaseTest {
 
-    WebDriver driver;
-    String login = System.getProperty("login", PropertyReader.getProperty("login"));
-    String password = System.getProperty("password", PropertyReader.getProperty("password"));
+    protected static WebDriver driver;
+    protected static DashboardAPIStep dashboardAPIStep;
+    protected static String login = System.getProperty("login", PropertyReader.getProperty("login"));
+    protected static String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
     @Parameters
     @BeforeMethod(alwaysRun = true, description = "Открытие браузера")
@@ -36,6 +38,7 @@ public class BaseTest {
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        dashboardAPIStep = new DashboardAPIStep();
     }
 
     @AfterMethod(alwaysRun = true, description = "Закрытие браузера")
