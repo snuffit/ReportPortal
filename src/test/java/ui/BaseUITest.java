@@ -1,0 +1,54 @@
+package ui;
+
+import com.github.javafaker.Faker;
+import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+import pages.DashboardPage;
+import steps.api.DashboardAPIStep;
+import steps.ui.DashboardUIStep;
+import steps.ui.LoginUIStep;
+import steps.ui.WidgetUIStep;
+import utils.PropertyReader;
+import utils.TestListener;
+
+import java.time.Duration;
+
+import static utils.AllureUtils.takeScreenshot;
+import static utils.DriverFactory.*;
+
+@Listeners(TestListener.class)
+public class BaseUITest {
+
+    protected static DashboardAPIStep dashboardAPIStep;
+    protected static String login = System.getProperty("login", PropertyReader.getProperty("login"));
+    protected static String password = System.getProperty("password", PropertyReader.getProperty("password"));
+    protected static LoginUIStep loginUIStep;
+    protected static WidgetUIStep widgetUIStep;
+    protected static DashboardUIStep dashboardUIStep;
+    protected static DashboardPage dashboardPage;
+    protected static Faker faker = new Faker();
+
+    @Parameters({"browser"})
+    @BeforeMethod(alwaysRun = true, description = "Открытие браузера")
+    public void setup(@Optional("chrome") String browser) {
+        createDriver(browser);
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        getDriver().manage().window().maximize();
+        dashboardAPIStep = new DashboardAPIStep();
+        loginUIStep = new LoginUIStep(getDriver());
+        widgetUIStep = new WidgetUIStep(getDriver());
+        dashboardUIStep = new DashboardUIStep(getDriver());
+        dashboardPage = new DashboardPage(getDriver());
+    }
+
+    @AfterMethod(alwaysRun = true, description = "Закрытие браузера")
+    public void tearDown(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            takeScreenshot(getDriver());
+        }
+        if (getDriver() != null) {
+            quitDriver();
+        }
+    }
+}
