@@ -3,12 +3,16 @@
 <suite thread-count="2" name="Regression Test" parallel="tests">
     <test name="Thread 1">
         <classes>
-            <class name="api.dashboard.CreateDashboardAPITest"/>
+            <class name="api.dashboard.CreateDashboardPositiveAPITest"/>
+            <class name="ui.widget.CreateWidgetUITest"/>
+            <parameter name="browser" value="chrome"/>
         </classes>
     </test> <!-- Test -->
     <test name="Thread 2">
         <classes>
+            <class name="api.dashboard.CreateDashboardNegativeAPITest"/>
             <class name="ui.widget.CreateWidgetUITest"/>
+            <parameter name="browser" value="firefox"/>
         </classes>
     </test>
 </suite>

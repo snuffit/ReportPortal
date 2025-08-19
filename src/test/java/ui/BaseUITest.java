@@ -20,7 +20,6 @@ import static utils.DriverFactory.*;
 @Listeners(TestListener.class)
 public class BaseUITest {
 
-    protected static WebDriver driver;
     protected static DashboardAPIStep dashboardAPIStep;
     protected static String login = System.getProperty("login", PropertyReader.getProperty("login"));
     protected static String password = System.getProperty("password", PropertyReader.getProperty("password"));
@@ -30,7 +29,7 @@ public class BaseUITest {
     protected static DashboardPage dashboardPage;
     protected static Faker faker = new Faker();
 
-    @Parameters
+    @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true, description = "Открытие браузера")
     public void setup(@Optional("chrome") String browser) {
         createDriver(browser);
