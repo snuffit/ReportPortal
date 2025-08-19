@@ -3,13 +3,13 @@
 <suite thread-count="2" name="CrossBrowser Test" parallel="tests">
     <test name="Chrome">
         <classes>
-            <class name="ui.widget.CreateWidgetTest"/>
+            <class name="ui.widget.CreateWidgetUITest"/>
             <parameter name="browser" value="chrome"/>
         </classes>
     </test> <!-- Test -->
     <test name="FireFox">
         <classes>
-            <class name="ui.widget.CreateWidgetTest"/>
+            <class name="ui.widget.CreateWidgetUITest"/>
             <parameter name="browser" value="firefox"/>
         </classes>
     </test> <!-- Test -->

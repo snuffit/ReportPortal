@@ -2,10 +2,6 @@ package ui;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,16 +12,14 @@ import steps.api.DashboardAPIStep;
 import steps.ui.DashboardUIStep;
 import steps.ui.LoginUIStep;
 import steps.ui.WidgetUIStep;
-import utils.DriverFactory;
 import utils.PropertyReader;
 
 import java.time.Duration;
-import java.util.HashMap;
 
 import static utils.AllureUtils.takeScreenshot;
 import static utils.DriverFactory.*;
 
-public class BaseTest {
+public class BaseUITest {
 
     protected static WebDriver driver;
     protected static DashboardAPIStep dashboardAPIStep;

@@ -1,17 +1,15 @@
 package ui.widget;
 
-import com.github.javafaker.Faker;
 import dto.api.Dashboard;
 import dto.ui.Widget;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ui.BaseTest;
+import ui.BaseUITest;
 
 import static org.testng.Assert.assertTrue;
 
-public class CreateWidgetTest extends BaseTest {
+public class CreateWidgetUITest extends BaseUITest {
 
     Dashboard dashboard = Dashboard.builder()
             .name("Test Dashboard-".concat(faker.regexify("[A-Za-z0-9]{8}")))

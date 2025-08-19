@@ -40,10 +40,4 @@ public class ResponseWrapper {
     public Response getResponse() {
         return response;
     }
-
-    public ResponseWrapper haveStatusCode(int expectedStatusCode) {
-        assertEquals(getStatusCode(), expectedStatusCode, "Ожидаемый статус " + expectedStatusCode +
-                " не получен, получен: " + getStatusCode());
-        return this;
-    }
 }
