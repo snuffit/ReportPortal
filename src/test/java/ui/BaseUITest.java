@@ -3,22 +3,21 @@ package ui;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import pages.DashboardPage;
 import steps.api.DashboardAPIStep;
 import steps.ui.DashboardUIStep;
 import steps.ui.LoginUIStep;
 import steps.ui.WidgetUIStep;
 import utils.PropertyReader;
+import utils.TestListener;
 
 import java.time.Duration;
 
 import static utils.AllureUtils.takeScreenshot;
 import static utils.DriverFactory.*;
 
+@Listeners(TestListener.class)
 public class BaseUITest {
 
     protected static WebDriver driver;

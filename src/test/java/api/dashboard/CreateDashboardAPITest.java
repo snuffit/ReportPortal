@@ -3,6 +3,9 @@ package api.dashboard;
 import adapters.ResponseWrapper;
 import api.BaseAPITest;
 import dto.api.Dashboard;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -10,7 +13,10 @@ public class CreateDashboardAPITest extends BaseAPITest {
 
     Dashboard dashboard;
 
-    @Test
+    @Epic("Create Dashboard ")
+    @Feature("Dashboard")
+    @Story("Create Dashboard with valid value by API")
+    @Test(testName = "Create Dashboard with valid value")
     public void createDashboardWithValidValue() {
         dashboard = Dashboard.builder()
                 .name("Test Dashboard-".concat(faker.regexify("[A-Za-z0-9]{8}")))
@@ -21,7 +27,10 @@ public class CreateDashboardAPITest extends BaseAPITest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Epic("Create Dashboard ")
+    @Feature("Dashboard")
+    @Story("Create Dashboard with invalid value by API")
+    @Test(testName = "Create Dashboard with invalid value")
     public void createDashboardWithInvalidValue() {
         dashboard = Dashboard.builder()
                 .name("12")
@@ -32,7 +41,7 @@ public class CreateDashboardAPITest extends BaseAPITest {
         softAssert.assertAll();
     }
 
-    @AfterMethod
+    @AfterMethod(description = "Delete Dashboard")
     public void deleteDashboard() {
         dashboardAPIStep.deleteDashboard(dashboard);
     }

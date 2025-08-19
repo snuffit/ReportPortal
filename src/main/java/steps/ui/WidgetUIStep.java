@@ -3,7 +3,6 @@ package steps.ui;
 import dto.ui.Widget;
 import org.openqa.selenium.WebDriver;
 import pages.DashboardPage;
-import pages.LoginPage;
 import pages.WidgetPage;
 
 public class WidgetUIStep {

@@ -4,7 +4,6 @@ import adapters.BaseApi;
 import adapters.ResponseWrapper;
 import dto.api.Dashboard;
 import io.qameta.allure.Step;
-import io.restassured.response.Response;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.List;
@@ -14,7 +13,8 @@ import java.util.Map;
 public class DashboardAPIStep extends BaseApi {
 
     final String DASHBOARD_ENDPOINT = "/dashboard",
-    PROJECT_NAME = "/default_personal";
+            PROJECT_NAME = "/default_personal",
+            URI = PROJECT_NAME + DASHBOARD_ENDPOINT;
 
     @Step("Create dashboard")
     public ResponseWrapper createDashboard(Dashboard dashboard) {
@@ -23,14 +23,14 @@ public class DashboardAPIStep extends BaseApi {
                 "name", dashboard.getName(),
                 "description", dashboard.getDescription()
         );
-        return post(PROJECT_NAME + DASHBOARD_ENDPOINT, body);
+        return post(URI, body);
     }
 
     @Step("Delete dashboard")
     public ResponseWrapper deleteDashboard(Dashboard dashboard) {
         String id = getDashboardID(dashboard.getName());
         log.info("Delete dashboard with id '{}' by API", id);
-        return delete(String.format("%s%s/%s", PROJECT_NAME, DASHBOARD_ENDPOINT, id));
+        return delete(String.format("%s/%s", URI, id));
     }
 
     @Step("Get dashboard ID by name")
@@ -46,17 +46,22 @@ public class DashboardAPIStep extends BaseApi {
                 return id;
             }
         }
+        log.warn("Project with name '{}' hasn't id", dashboardName);
         return null;
     }
 
+    @Step("Get all dashboards")
     public ResponseWrapper getAllDashboards() {
-        return get(PROJECT_NAME + DASHBOARD_ENDPOINT);
+        return get(URI);
     }
 
+    @Step("Checking if Dashboard is created")
     public boolean isDashboardCreated(Dashboard dashboard) {
-        if(getDashboardID(dashboard.getName()) != null) {
+        if (getDashboardID(dashboard.getName()) != null) {
+            log.info("Dashboard is created");
             return true;
         }
+        log.warn("Dashboard isn't created");
         return false;
     }
 }

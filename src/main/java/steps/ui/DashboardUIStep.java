@@ -11,7 +11,6 @@ public class DashboardUIStep {
     DashboardPage dashboardPage;
     DashboardAPIStep dashboardAPIStep;
 
-
     public DashboardUIStep(WebDriver driver) {
         this.driver = driver;
         dashboardPage = new DashboardPage(driver);

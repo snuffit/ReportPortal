@@ -5,12 +5,12 @@ import pages.LoginPage;
 
 public class LoginUIStep {
 
-        WebDriver driver;
-        LoginPage loginPage;
+    WebDriver driver;
+    LoginPage loginPage;
 
     public LoginUIStep(WebDriver driver) {
-            this.driver = driver;
-            loginPage = new LoginPage(driver);
+        this.driver = driver;
+        loginPage = new LoginPage(driver);
     }
 
     public void auth(String login, String password) {

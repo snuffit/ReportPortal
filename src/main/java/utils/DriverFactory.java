@@ -1,5 +1,6 @@
 package utils;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,6 +9,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.util.HashMap;
 
+@Log4j2
 public class DriverFactory {
 
     private static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
@@ -39,6 +41,7 @@ public class DriverFactory {
                 driver = new FirefoxDriver(options);
                 driverThreadLocal.set(driver);
             }
+            log.info("Setting up browser: {}", browser);
         }
     }
 
